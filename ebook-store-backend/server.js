@@ -1,35 +1,36 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const dotenv = require("dotenv");
-
-dotenv.config();
 
 const app = express();
 
-// Middleware
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
-// Routes
-app.use("/api/books", require("./books"));
-app.use("/categories", require("./categories"));
-app.use("/api/auth", require("./auth"));
-
-// Test route
+// ✅ TEST ROUTE (IMPORTANT)
 app.get("/", (req, res) => {
-  res.json({ message: "eBook Store API is running..." });
+  res.send("Backend is running ✅");
 });
 
-// Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI)
+// ✅ MongoDB connection (safe)
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    console.log("✅ MongoDB Connected Successfully");
-    app.listen(process.env.PORT, () => {
-      console.log(`✅ Server running on http://localhost:${process.env.PORT}`);
-    });
+    console.log("MongoDB Connected ✅");
   })
   .catch((err) => {
-    console.log("❌ MongoDB Connection Error:", err.message);
+    console.error("MongoDB Error:", err.message);
   });
+
+// ✅ Routes (comment temporarily if crash)
+try {
+  app.use("/api/books", require("./routes/books"));
+} catch (err) {
+  console.log("Books route error (ignored for now)");
+}
+
+// ✅ PORT (REQUIRED for Render)
+const PORT = process.env.PORT || 10000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
