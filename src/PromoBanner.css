@@ -1,0 +1,61 @@
+.promo-banner {
+  background: linear-gradient(90deg, #1a1408 0%, #2a1f08 50%, #1a1408 100%);
+  border-bottom: 1px solid var(--gold-dim);
+  padding: 0.6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  position: relative;
+  z-index: 198;
+}
+
+.promo-icon { color: var(--gold); font-size: 0.7rem; flex-shrink: 0; }
+
+.promo-banner p {
+  font-size: 0.78rem;
+  color: var(--cream-dim);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.promo-banner strong { color: var(--gold); }
+
+.promo-code {
+  background: rgba(201,168,92,0.15);
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.promo-cta {
+  padding: 0.25rem 0.8rem;
+  background: var(--gold);
+  color: var(--bg);
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+.promo-cta:hover { background: var(--gold-light); }
+
+.promo-close {
+  position: absolute;
+  right: 1rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color var(--transition);
+  padding: 4px;
+}
+.promo-close:hover { color: var(--text); }

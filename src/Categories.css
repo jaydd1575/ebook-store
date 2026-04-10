@@ -1,0 +1,72 @@
+.categories-section {
+  padding: 2rem 5% 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.categories-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.label-line {
+  width: 28px; height: 1px;
+  background: var(--border);
+}
+
+.categories-pills {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;        /* 👈 already there */
+  overflow-x: auto;       /* 👈 ADD THIS — allows scroll on mobile */
+  padding-bottom: 4px;    /* 👈 ADD THIS — space for scrollbar */
+  scrollbar-width: none;  /* 👈 ADD THIS — hides scrollbar on Firefox */
+}
+
+.categories-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.category-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--cream-dim);
+  font-size: 0.8rem;
+  font-weight: 400;
+  transition: all var(--transition);
+  background: transparent;
+}
+
+.pill-icon { font-size: 0.85rem; }
+
+.category-pill:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+  background: rgba(201, 168, 92, 0.06);
+}
+
+.category-pill.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--bg);
+  font-weight: 500;
+}
