@@ -10,9 +10,7 @@ const app = express();
 // ── CORS Fix ──
 app.use(cors({
   origin: [
-    "http://localhost:5173",           // local dev
-    "http://localhost:5174",           // local dev alternate port
-    "https://ebook-store-frontend.vercel.app",  // your Vercel URL
+     // your Vercel URL
     /\.vercel\.app$/,                  // allow all vercel preview URLs
   ],
   credentials: true,
@@ -23,9 +21,9 @@ app.use(cors({
 app.use(express.json());
 
 // Routes
-app.use("/api/books", require("./routes/books"));
-app.use("/api/categories", require("./routes/categories"));
-app.use("/api/auth", require("./routes/auth"));
+app.use("/books", require("./books"));
+app.use("/categories", require("./categories"));
+app.use("/auth", require("./auth"));
 
 app.get("/", (req, res) => {
   res.json({ message: "eBook Store API is running..." });

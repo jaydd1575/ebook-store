@@ -1,51 +1,74 @@
-const BASE_URL = "http://localhost:5000/api";
-// 🔐 Get Token
-const getToken = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user?.token;
-};
+const BASE_URL = import.meta.env.VITE_API_URL || "https://ebook-backend-468p.onrender.com/api";
 
-// 📚 Books
+// ── Books ──
 export const fetchBooks = async (category = "All", search = "") => {
-  let url = `${BASE_URL}/books?`;
+  try {
+    let url = `${import.meta.env.VITE_API_URL}/books`;
 
-  if (category && category !== "All") url += `category=${category}&`;
-  if (category === "All") url += `featured=true&`;
-  if (search) url += `search=${search}`;
+    const params = [];
 
-  const res = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${getToken() || ""}`,
-    },
-  });
+    if (category && category !== "All") {
+      params.push(`category=${category}`);
+    }
 
-  return res.json();
+    if (search) {
+      params.push(`search=${search}`);
+    }
+
+    if (params.length > 0) {
+      url += `?${params.join("&")}`;
+    }
+
+    console.log("FETCH URL:", url);
+
+    const res = await fetch(url);
+
+    if (!res.ok) throw new Error("Failed to fetch books");
+
+    return await res.json();
+  } catch (err) {
+    console.error("fetchBooks error:", err);
+    return [];
+  }
 };
 
-// 📂 Categories
+// ── Categories ──
 export const fetchCategories = async () => {
-  const res = await fetch(`${BASE_URL}/categories`);
-  return res.json();
+  try {
+    const res = await fetch(`${BASE_URL}/categories`);
+    if (!res.ok) throw new Error("Failed to fetch categories");
+    return await res.json();
+  } catch (error) {
+    console.error("fetchCategories error:", error);
+    return [];
+  }
 };
 
-// 🔐 Login
+// ── Auth ──
 export const loginUser = async (email, password) => {
-  const res = await fetch(`${BASE_URL}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
-
-  return res.json();
+  try {
+    const res = await fetch(`${BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    return await res.json();
+  } catch (error) {
+    console.error("loginUser error:", error);
+    return { message: "Login failed" };
+  }
 };
 
-// 📝 Register
 export const registerUser = async (data) => {
-  const res = await fetch(`${BASE_URL}/auth/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-
-  return res.json();
+  try {
+    const res = await fetch(`${BASE_URL}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    return await res.json();
+  } catch (error) {
+    console.error("registerUser error:", error);
+    return { message: "Registration failed" };
+  }
 };
