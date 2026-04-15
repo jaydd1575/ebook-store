@@ -1,9 +1,11 @@
-const BASE_URL = import.meta.env.VITE_API_URL || "https://ebook-backend-468p.onrender.com/api";
+const BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  "https://ebook-backend-468p.onrender.com/api";
 
 // ── Books ──
 export const fetchBooks = async (category = "All", search = "") => {
   try {
-    let url = `${import.meta.env.VITE_API_URL}/books`;
+    let url = `${BASE_URL}/books`;
 
     const params = [];
 
@@ -52,7 +54,12 @@ export const loginUser = async (email, password) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-    return await res.json();
+
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.message || "Login failed");
+
+    return data;
   } catch (error) {
     console.error("loginUser error:", error);
     return { message: "Login failed" };
@@ -66,7 +73,12 @@ export const registerUser = async (data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    return await res.json();
+
+    const result = await res.json();
+
+    if (!res.ok) throw new Error(result.message || "Registration failed");
+
+    return result;
   } catch (error) {
     console.error("registerUser error:", error);
     return { message: "Registration failed" };
