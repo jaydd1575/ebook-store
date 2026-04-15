@@ -21,8 +21,8 @@ app.use(cors({
 app.use(express.json());
 
 // Routes
-app.use("/books", require("./books"));
-app.use("/categories", require("./categories"));
+app.use("/api/books", require("./books"));
+app.use("/api/categories", require("./categories"));
 app.use("/api/auth", require("./routes/auth"));
 
 app.get("/", (req, res) => {
