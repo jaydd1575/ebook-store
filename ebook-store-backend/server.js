@@ -23,7 +23,7 @@ app.use(express.json());
 // Routes
 app.use("/books", require("./books"));
 app.use("/categories", require("./categories"));
-app.use("/auth", require("./auth"));
+app.use("/api/auth", require("./routes/auth"));
 
 app.get("/", (req, res) => {
   res.json({ message: "eBook Store API is running..." });

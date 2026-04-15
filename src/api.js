@@ -49,7 +49,7 @@ export const fetchCategories = async () => {
 // ── Auth ──
 export const loginUser = async (email, password) => {
   try {
-    const res = await fetch(`${BASE_URL}/auth/login`, {
+    const res = await fetch(`${BASE_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -68,7 +68,7 @@ export const loginUser = async (email, password) => {
 
 export const registerUser = async (data) => {
   try {
-    const res = await fetch(`${BASE_URL}/auth/register`, {
+    const res = await fetch(`${BASE_URL}/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
