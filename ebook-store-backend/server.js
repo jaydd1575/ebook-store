@@ -21,9 +21,9 @@ app.use(cors({
 app.use(express.json());
 
 // Routes
-app.use("/api/books", require("./books"));
-app.use("/api/categories", require("./categories"));
-app.use("/api/auth", require("./routes/auth"));
+app.use("/books", require("./books"));
+app.use("/categories", require("./categories"));
+app.use("/auth", require("./auth"));
 
 app.get("/", (req, res) => {
   res.json({ message: "eBook Store API is running..." });
