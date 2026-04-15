@@ -44,8 +44,8 @@ mongoose
   // TEMPORARY — remove after seeding
 app.get("/api/seed", async (req, res) => {
   try {
-    const Book = require("./models/Book");
-    const Category = require("./models/Category");
+    const Book = require("./Book");
+    const Category = require("./Category");
 
     await Book.deleteMany();
     await Category.deleteMany();
